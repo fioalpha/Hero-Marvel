@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/list_characters_fragment">
+
+    <fragment android:id="@+id/list_characters_fragment"
+        android:name="br.com.fioalpha.heromarvel.presentation.listcharacters.presentation.ListCharacterFragment"
+        android:label="Heroes">
+        <action android:id="@+id/listCharactersAction"
+            app:destination="@id/detail_character_fragment" />
+    </fragment>
+
+    <fragment android:id="@+id/detail_character_fragment"
+        android:name="br.com.fioalpha.heromarvel.presentation.detailcharacter.DetailsCharactersFragment"
+        android:label="Detail">
+        <argument android:name="character"
+            app:argType="br.com.fioalpha.heromarvel.presentation.listcharacters.presentation.model.CharacterViewData"/>
+    </fragment>
+
+    <fragment android:id="@+id/favorite_fragment"
+        android:name="br.com.fioalpha.heromarvel.presentation.favorite.FavoriteFragment"
+        android:label="Favorite">
+        <action android:id="@+id/favoriteAction"
+            app:destination="@id/detail_character_fragment" />
+    </fragment>
+
+</navigation>
