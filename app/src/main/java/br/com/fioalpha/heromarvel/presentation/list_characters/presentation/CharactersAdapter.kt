@@ -6,10 +6,13 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.annotation.DrawableRes
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import br.com.fioalpha.heromarvel.R
 import br.com.fioalpha.heromarvel.core.imageManager.ImageManger
 import br.com.fioalpha.heromarvel.presentation.list_characters.presentation.model.CharacterViewData
+
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class CharactersAdapter(
     private val imageManger: ImageManger,
@@ -66,10 +69,12 @@ class CharactersAdapter(
             with (itemView) {
                 imageManger.loaderImage(data.imagePath, findViewById<ImageView>(R.id.character_adapter_image))
                 findViewById<TextView>(R.id.character_adapter_title).text = data.title
-                val imageFavorite = findViewById<ImageView>(R.id.character_adapter_favorite)
-                imageFavorite.setBackgroundResource(data.handleFavorite())
-                imageFavorite.setOnClickListener { actionFavorite(data, adapterPosition) }
                 setOnClickListener { actionItemSelected(data) }
+                findViewById<FloatingActionButton>(R.id.character_adapter_favorite)
+                    .apply {
+                        setOnClickListener { actionFavorite(data, adapterPosition) }
+                        setImageResource(data.handleFavorite())
+                    }
             }
         }
 

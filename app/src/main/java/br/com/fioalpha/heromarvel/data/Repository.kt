@@ -11,4 +11,5 @@ interface Repository {
     fun removeFavorite(character: CharacterDomain): Completable
     fun saveFavorite(character: CharacterDomain): Completable
     fun characterIsFavorite(character: CharacterDomain): Single<Boolean>
+    fun characterByTerm(term: String): Observable<List<CharacterDomain>>
 }

@@ -49,7 +49,7 @@ class FetchCharactersUseCaseTest {
 
     @Test
     fun `call execute  With paging Success receiver data` () {
-        usecase.nextPage()
+        usecase.page(2)
         whenever(repository.fetchCharacter(2)).thenReturn(
             Observable.just(
                 gson.fromJson<List<CharacterDomain>>(mockCreator.getMockText(CHARACTER_JSON)

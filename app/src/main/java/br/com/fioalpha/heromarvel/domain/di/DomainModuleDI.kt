@@ -6,16 +6,17 @@ import br.com.fioalpha.heromarvel.domain.FetchAllFavoriteUseCaseImpl
 import org.koin.dsl.module
 
 val domainModuleDI = module {
-    factory<FetchCharactersUseCase> {
+    single<FetchCharactersUseCase> {
         FetchCharactersUseCaseImp(get())
     }
-    factory<HandleFavoriteCharacterUseCase> {
+    single<HandleFavoriteCharacterUseCase> {
         HandleFavoriteCharacterUseCaseImpl(get())
     }
-    factory<IsCharacterFavoriteUseCase> {
+    single<IsCharacterFavoriteUseCase> {
         IsCharacterFavoriteUseCaseImpl(get())
     }
-    factory<FetchAllFavoriteUseCase> {
+    single<FetchAllFavoriteUseCase> {
         FetchAllFavoriteUseCaseImpl(get())
     }
+    single<SearchHeroUseCase> { SearchHeroUseCaseImpl(get()) }
 }

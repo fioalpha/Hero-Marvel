@@ -17,11 +17,11 @@ interface Service {
 
     @GET("characters")
     fun fetchCharacters(
-        @Query("id") id: Int,
+        @Query("nameStartsWith") term: String,
         @Query("ts") timeStamp: Long,
         @Query("apikey") apiKey: String,
         @Query("hash") hash: String
-    ): Single<DataResponse>
+    ): Observable<DataResponse>
 
 }
 

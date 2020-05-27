@@ -1,10 +1,11 @@
 package br.com.fioalpha.heromarvel.presentation.list_characters.presentation
 
+import android.app.Activity
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
+import android.view.inputmethod.InputMethodManager
 import android.widget.ProgressBar
+import android.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -15,16 +16,19 @@ import br.com.fioalpha.heromarvel.core.utils.show
 import br.com.fioalpha.heromarvel.core.utils.transform
 import br.com.fioalpha.heromarvel.core.views.EmptyViewCustom
 import br.com.fioalpha.heromarvel.core.views.ErrorViewCustom
-import br.com.fioalpha.heromarvel.domain.model.CharacterDomain
 import br.com.fioalpha.heromarvel.presentation.list_characters.presentation.model.CharacterViewData
 import br.com.fioalpha.heromarvel.presentation.list_characters.presentation.model.CharacterViewStatus
+import com.jakewharton.rxbinding2.widget.RxSearchView
+import com.jakewharton.rxbinding2.widget.RxTextView
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 import org.koin.android.ext.android.get
 import org.koin.android.ext.android.inject
+import java.util.concurrent.TimeUnit
 
-class ListCharacterFragment: Fragment() {
+class ListCharacterFragment: Fragment(), SearchView.OnQueryTextListener  {
 
     private val adapter: CharactersAdapter = CharactersAdapter(
         get(),
@@ -51,10 +55,10 @@ class ListCharacterFragment: Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.list_characters, container, false)
         with(view) {
-            recycler = findViewById(R.id.characters_recycler)
-            loader = findViewById(R.id.characters_progress)
-            errorView = findViewById(R.id.character_error)
-            emptyView = findViewById(R.id.empty_view_custom)
+            recycler = findViewById(R.id.search_recycler)
+            loader = findViewById(R.id.search_progress)
+            errorView = findViewById(R.id.search_error)
+            emptyView = findViewById(R.id.search_empty)
         }
         return view
     }
@@ -62,12 +66,23 @@ class ListCharacterFragment: Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupRecycler()
+        setHasOptionsMenu(true)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+
+        inflater.inflate(R.menu.menu_toolbar, menu)
+        val searchView = menu.findItem(R.id.menu_search)
+            .run { this.actionView as SearchView }
+
+        setupSearchView(searchView)
     }
 
     override fun onStart() {
         super.onStart()
         disposable.add(
-             viewModel.loadData()
+            viewModel.loadData()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnNext(::render)
@@ -89,6 +104,16 @@ class ListCharacterFragment: Fragment() {
         }
     }
 
+    private fun setupSearchView(searchView: SearchView) {
+        RxSearchView.queryTextChanges(searchView)
+            .debounce(300, TimeUnit.MILLISECONDS)
+            .skip(3)
+            .switchMap { viewModel.search(it.toString()).subscribeOn(Schedulers.io()) }
+            .observeOn(AndroidSchedulers.mainThread())
+            .doOnNext(::render)
+            .subscribe()
+    }
+
     private fun setupRecycler() {
         recycler.apply {
             adapter = this@ListCharacterFragment.adapter
@@ -98,9 +123,11 @@ class ListCharacterFragment: Fragment() {
     }
 
     private fun handleFavoriteClick(characterViewData: CharacterViewData, position: Int) {
-        viewModel.handleFavorite(characterViewData, position)
-            .doOnNext { adapter.updateData(it.first.transform(), it.second) }
-            .subscribe()
+        disposable.add(
+            viewModel.handleFavorite(characterViewData, position)
+                .doOnNext { adapter.updateData(it.first.transform(), it.second) }
+                .subscribe()
+        )
     }
 
     private fun handleItemClick(characterViewData: CharacterViewData) {
@@ -135,6 +162,19 @@ class ListCharacterFragment: Fragment() {
         errorView.show()
         emptyView.hide()
         errorView.setMessage(message)
+    }
+
+    override fun onQueryTextSubmit(query: String?): Boolean {
+        viewModel.search(query.orEmpty())
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .doOnNext(::render)
+            .subscribe()
+        return true
+    }
+
+    override fun onQueryTextChange(newText: String?): Boolean {
+        return true
     }
 
 }

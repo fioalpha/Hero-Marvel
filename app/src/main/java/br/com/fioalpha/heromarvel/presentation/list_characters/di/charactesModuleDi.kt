@@ -5,7 +5,7 @@ import org.koin.dsl.module
 
 val charactersModuleDI = module {
     factory {
-        CharactersViewModel(get(), get(), get())
+        CharactersViewModel(get(), get(), get(), get())
     }
 
 }

@@ -4,19 +4,19 @@ import br.com.fioalpha.heromarvel.data.Repository
 import br.com.fioalpha.heromarvel.domain.model.CharacterDomain
 import io.reactivex.Observable
 
-class FetchCharactersUseCaseImp(
+class SearchHeroUseCaseImpl(
     private val repository: Repository
-): FetchCharactersUseCase {
+): SearchHeroUseCase {
 
-    private var page: Int = 1
+    private lateinit var term: String
 
-
-    override fun page(page: Int) = apply {
-        this.page = page
+    override fun setTerm(term: String) = apply {
+        this.term = term
     }
 
     override fun execute(): Observable<List<CharacterDomain>> {
-        return repository.fetchCharacter(page)
+        return if(term.isEmpty()) repository.fetchCharacter(1)
+        else repository.characterByTerm(term)
     }
 
 }

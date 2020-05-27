@@ -1,5 +1,6 @@
 package br.com.fioalpha.heromarvel.presentation.detail_character.model
 
+import br.com.fioalpha.heromarvel.R
 import br.com.fioalpha.heromarvel.presentation.list_characters.presentation.model.CharacterViewData
 
 data class CharacterDetailViewData(
@@ -7,26 +8,20 @@ data class CharacterDetailViewData(
     val name: String,
     val descriptions: String,
     val imagePath: String,
-    val favorite: Boolean
+    val favorite: Boolean,
+    val iconFavorite: Int = R.drawable.un_favorite
 ) {
 
     companion object {
 
-        fun transform(character: CharacterViewData) = CharacterDetailViewData (
+        fun transform(character: CharacterViewData, handleFavorite:(Boolean) -> Int) = CharacterDetailViewData (
             id = character.id,
             name = character.title,
             descriptions = character.description,
             imagePath = character.imagePath,
-            favorite = character.favorite
+            favorite = character.favorite,
+            iconFavorite = handleFavorite.invoke(character.favorite)
         )
-//
-//        fun transform(character: CharacterViewData) = CharacterDomain (
-//            id = character.id,
-//            name = character.title,
-//            description = character.description,
-//            imagePath = character.imagePath,
-//            favorite = character.favorite
-//        )
     }
 
 }

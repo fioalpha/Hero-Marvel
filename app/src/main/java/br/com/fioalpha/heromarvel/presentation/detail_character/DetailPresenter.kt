@@ -6,7 +6,9 @@ import br.com.fioalpha.heromarvel.core.utils.SchedulerRx
 import br.com.fioalpha.heromarvel.domain.HandleFavoriteCharacterUseCase
 import br.com.fioalpha.heromarvel.domain.model.CharacterDomain
 import br.com.fioalpha.heromarvel.presentation.detail_character.model.CharacterDetailViewData
+import br.com.fioalpha.heromarvel.presentation.list_characters.presentation.model.CharacterViewData
 import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.disposables.Disposable
 
 class DetailPresenter(
     private val view: DetailsView,
@@ -16,42 +18,59 @@ class DetailPresenter(
 
     private val disposable = CompositeDisposable()
 
-    private var characterDetail: CharacterDetailViewData? = null
-
-    fun loadData(characterDetail: CharacterDetailViewData?) {
-        this.characterDetail = characterDetail
+    fun loadData(characterDetail: CharacterViewData?) {
         characterDetail?.let {
-            view.showData(characterDetail)
+            val character = CharacterDetailViewData.transform(it) { isFavorite ->
+                getIconFavorite(isFavorite)
+            }
+            view.hideError()
+            view.showData(character)
+            view.updateFavorite(character)
         } ?: view.showError("Dados incorretos")
     }
 
-    fun handleClickFavorite() {
-        disposable.add(
-            handleFavoriteCharacterUseCase.setCharacter(CharacterDomain.transform(characterDetail!!))
-                .execute()
-                .subscribeOn(scheduler.ioSchedule())
-                .observeOn(scheduler.mainSchedule())
-                .map { it.favorite }
-                .doOnNext {
-                    this.characterDetail = this.characterDetail?.copy(favorite = it)
-                }
-                .subscribe(
-                    { view.updateFavorite(getIconFavorite()) },
-                    { view.showError(it.message.orEmpty()) },
-                    {}
-                )
-        )
+    fun handleClickFavorite(character: CharacterDetailViewData?) {
+        character?.let {
+            disposable.add(handleFavorite(character))
+        }?: view.showError("Dados incorretos")
+
     }
 
-    fun handleStatusFavorite() {
-        view.updateFavorite(getIconFavorite())
-    }
 
     @DrawableRes
-    private fun getIconFavorite(): Int {
-        return if (characterDetail?.favorite == true)
-            R.drawable.favorite
-            else
-            R.drawable.un_favorite
+    fun getIconFavorite(favorite: Boolean): Int {
+        return if (favorite) R.drawable.favorite
+            else R.drawable.un_favorite
     }
+
+    fun CharacterDomain.transform() = CharacterDetailViewData(
+        id = id,
+        name = name,
+        descriptions = description,
+        favorite = favorite,
+        imagePath = imagePath,
+        iconFavorite = getIconFavorite(favorite)
+    )
+
+    fun unbind() {
+        disposable.clear()
+    }
+
+    private fun handleFavorite(character: CharacterDetailViewData): Disposable {
+        view.hideError()
+        return handleFavoriteCharacterUseCase.setCharacter(CharacterDomain.transform(character))
+            .execute()
+            .subscribeOn(scheduler.ioSchedule())
+            .observeOn(scheduler.mainSchedule())
+            .map { it.transform() }
+            .subscribe(
+                {
+                    view.updateFavorite(it)
+                },
+                { view.showError(it.message.orEmpty()) },
+                {}
+            )
+    }
+
 }
+

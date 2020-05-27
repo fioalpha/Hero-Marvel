@@ -5,7 +5,8 @@ import br.com.fioalpha.heromarvel.presentation.detail_character.model.CharacterD
 
 interface DetailsView {
     fun showData(character: CharacterDetailViewData)
-    fun updateFavorite(@DrawableRes favorite: Int)
+    fun updateFavorite(character: CharacterDetailViewData)
     fun showError(message: String)
+    fun hideError()
     fun showWarning(message: String)
 }

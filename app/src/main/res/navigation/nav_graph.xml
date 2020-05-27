@@ -24,4 +24,10 @@
         <action android:id="@+id/favoriteAction"
             app:destination="@id/detail_character_fragment" />
     </fragment>
+
+    <fragment android:id="@+id/search_fragment"
+        android:name="br.com.fioalpha.heromarvel.presentation.search.SearchFragment"
+        android:label="Busca">
+    </fragment>
+
 </navigation>

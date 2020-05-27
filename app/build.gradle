@@ -51,8 +51,8 @@ dependencies {
     implementation 'androidx.cardview:cardview:1.0.0'
     implementation 'com.google.android.material:material:1.1.0'
 
-    implementation "androidx.navigation:navigation-fragment-ktx:2.3.0-alpha06"
-    implementation "androidx.navigation:navigation-ui-ktx:2.3.0-alpha06"
+    implementation "androidx.navigation:navigation-fragment-ktx:2.3.0-beta01"
+    implementation "androidx.navigation:navigation-ui-ktx:2.3.0-beta01"
 
     implementation "org.koin:koin-android:2.1.5"
 
@@ -61,6 +61,10 @@ dependencies {
     implementation 'com.squareup.retrofit2:retrofit:2.6.2'
     implementation 'com.squareup.okhttp3:logging-interceptor:4.6.0'
     implementation 'com.squareup.retrofit2:adapter-rxjava2:2.6.2'
+
+
+    implementation  'com.jakewharton.rxbinding2:rxbinding:2.2.0'
+
 
     implementation 'com.google.code.gson:gson:2.8.6'
     implementation 'com.squareup.retrofit2:converter-gson:2.6.2'

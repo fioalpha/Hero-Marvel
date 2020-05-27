@@ -97,4 +97,13 @@ class RepositoryImpl(
             Single.just(false)
         }
     }
+
+    override fun characterByTerm(term: String): Observable<List<CharacterDomain>> {
+        return remoteDataSource.fetchCharacters(
+            term,
+            time,
+            publicKey,
+            hash
+        ).map { data -> data.data.results.transform { it.transform() } }
+    }
 }

@@ -28,6 +28,7 @@ class CustomApplication: Application() {
 }
 
 internal fun initDependencies(application: Application) {
+
     startKoin {
         androidContext(application.applicationContext)
         androidLogger()
@@ -45,6 +46,7 @@ internal fun initDependencies(application: Application) {
             )
         )
     }
+
 }
 
 internal val moduleGeneralDI = module {

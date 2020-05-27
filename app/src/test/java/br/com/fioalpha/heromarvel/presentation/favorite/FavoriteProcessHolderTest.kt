@@ -1,11 +1,11 @@
 package br.com.fioalpha.heromarvel.presentation.favorite
 
+import br.com.fioalpha.heromarvel.core.utils.transform
 import br.com.fioalpha.heromarvel.domain.FetchAllFavoriteUseCase
 import br.com.fioalpha.heromarvel.domain.model.CharacterDomain
 import br.com.fioalpha.heromarvel.domain.HandleFavoriteCharacterUseCase
 import br.com.fioalpha.heromarvel.presentation.favorite.model.FavoriteAction
 import br.com.fioalpha.heromarvel.presentation.favorite.model.FavoriteResult
-import br.com.fioalpha.heromarvel.presentation.list_characters.presentation.transform
 import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.whenever
 import io.reactivex.Observable
@@ -75,7 +75,7 @@ class FavoriteProcessHolderTest {
     @Test
     fun `when called actionsProcessor With delete action Then return character list`() {
         whenever(fetchAllFavoriteUseCase.execute()).thenReturn(Observable.just(characters))
-        whenever(handleFavoriteCharacterUseCase.setCharacter(characters.first().changeFavoriteStatus())).thenReturn(handleFavoriteCharacterUseCase)
+        whenever(handleFavoriteCharacterUseCase.setCharacter(characters.first())).thenReturn(handleFavoriteCharacterUseCase)
         whenever(handleFavoriteCharacterUseCase.execute()).thenReturn(Observable.just(characters.first()))
 
 

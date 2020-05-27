@@ -7,7 +7,7 @@ import io.reactivex.Observable
 import io.reactivex.Single
 import org.koin.dsl.module
 
-@Database(entities = [CharacterFavoriteRoom::class], version = 2)
+@Database(entities = [CharacterFavoriteRoom::class], version = 2,  exportSchema = false)
 abstract class AppDatabase: RoomDatabase(){
     abstract fun characterFavoriteDao(): CharacterFavoriteDao
 }

@@ -1,9 +1,7 @@
 package br.com.fioalpha.heromarvel.presentation.favorite
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.widget.ProgressBar
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
@@ -53,7 +51,7 @@ class FavoriteFragment: Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.list_characters, container, false)
+        val view = inflater.inflate(R.layout.list_characters_favorite, container, false)
         setupView(view)
         setupRecycler()
         disposable.add(
@@ -69,10 +67,10 @@ class FavoriteFragment: Fragment() {
 
     private fun setupView(view: View) {
         with(view) {
-            recycler = findViewById(R.id.characters_recycler)
-            loader = findViewById(R.id.characters_progress)
-            errorView = findViewById(R.id.character_error)
-            emptyView = findViewById(R.id.empty_view_custom)
+            recycler = findViewById(R.id.search_recycler)
+            loader = findViewById(R.id.search_progress)
+            errorView = findViewById(R.id.search_error)
+            emptyView = findViewById(R.id.search_empty)
         }
     }
 
