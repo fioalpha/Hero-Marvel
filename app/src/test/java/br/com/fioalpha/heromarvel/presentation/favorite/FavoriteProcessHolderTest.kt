@@ -54,8 +54,9 @@ class FavoriteProcessHolderTest {
 
     @Before
     fun setup() {
-        processHolder = FavoriteProcessHolder(handleFavoriteCharacterUseCase, fetchAllFavoriteUseCase)
-
+        processHolder = FavoriteProcessHolder(
+            handleFavoriteCharacterUseCase, fetchAllFavoriteUseCase
+        )
     }
 
     @Test
@@ -75,11 +76,16 @@ class FavoriteProcessHolderTest {
     @Test
     fun `when called actionsProcessor With delete action Then return character list`() {
         whenever(fetchAllFavoriteUseCase.execute()).thenReturn(Observable.just(characters))
-        whenever(handleFavoriteCharacterUseCase.setCharacter(characters.first())).thenReturn(handleFavoriteCharacterUseCase)
-        whenever(handleFavoriteCharacterUseCase.execute()).thenReturn(Observable.just(characters.first()))
+        whenever(handleFavoriteCharacterUseCase.setCharacter(characters.first()))
+            .thenReturn(handleFavoriteCharacterUseCase)
+        whenever(handleFavoriteCharacterUseCase.execute()).thenReturn(
+            Observable.just(characters.first())
+        )
 
 
-        val value = Observable.just(FavoriteAction.Delete(characters.first().transform(), 1))
+        val value = Observable.just(
+            FavoriteAction.Delete(characters.first().transform(), 1)
+        )
             .compose(processHolder.actionsProcessor)
             .test()
             .assertNoErrors()

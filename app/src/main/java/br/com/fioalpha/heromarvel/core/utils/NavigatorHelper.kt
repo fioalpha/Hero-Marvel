@@ -4,8 +4,8 @@ import android.os.Bundle
 import androidx.navigation.findNavController
 import br.com.fioalpha.heromarvel.R
 import br.com.fioalpha.heromarvel.presentation.favorite.FavoriteFragment
-import br.com.fioalpha.heromarvel.presentation.list_characters.presentation.model.CharacterViewData
-import br.com.fioalpha.heromarvel.presentation.list_characters.presentation.ListCharacterFragment
+import br.com.fioalpha.heromarvel.presentation.listcharacters.presentation.model.CharacterViewData
+import br.com.fioalpha.heromarvel.presentation.listcharacters.presentation.ListCharacterFragment
 
 const val CHARACTER_ID_EXTRA = "character"
 

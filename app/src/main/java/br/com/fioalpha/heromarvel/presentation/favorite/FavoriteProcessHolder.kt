@@ -22,7 +22,8 @@ class FavoriteProcessHolder(
         }
     }
 
-    private val loaderFavoriteProcessor = ObservableTransformer<FavoriteAction.Loader, FavoriteResult.FavoriteLoaderResult> {
+    private val loaderFavoriteProcessor = ObservableTransformer<
+            FavoriteAction.Loader, FavoriteResult.FavoriteLoaderResult>{
         actions -> actions.flatMap {
             fetchAllFavoriteUseCase.execute()
                 .map (this::handleResult)
@@ -36,7 +37,9 @@ class FavoriteProcessHolder(
         if (result.isEmpty()) FavoriteResult.FavoriteLoaderResult.EmptyView
         else FavoriteResult.FavoriteLoaderResult.Success(result.transform { it.transform() })
 
-    private val deleteFavoriteProcessor = ObservableTransformer<FavoriteAction.Delete, FavoriteResult> {
+    private val deleteFavoriteProcessor = ObservableTransformer<
+            FavoriteAction.Delete, FavoriteResult
+        > {
         actions -> actions.flatMap { character ->
             handleStatusFavoriteUseCase.setCharacter(character.characterViewData.transform())
                 .execute()
@@ -55,8 +58,13 @@ class FavoriteProcessHolder(
     }
 
     private fun createFilterObservable(shared: Observable<FavoriteAction>): Observable<FavoriteResult>? {
-        return shared.filter { filter -> (filter !is FavoriteAction.Delete && filter !is FavoriteAction.Loader) }
-            .flatMap { action -> Observable.error<FavoriteResult>(IllegalArgumentException("Unknown Action type: $action")) }
+        return shared.filter {
+            filter -> (filter !is FavoriteAction.Delete && filter !is FavoriteAction.Loader)
+        }.flatMap {
+            action -> Observable.error<FavoriteResult>(
+                IllegalArgumentException("Unknown Action type: $action")
+            )
+        }
     }
 
     private fun createMergerObservable(shared: Observable<FavoriteAction>): Observable<FavoriteResult>{

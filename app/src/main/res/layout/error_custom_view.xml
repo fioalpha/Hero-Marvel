@@ -13,7 +13,7 @@
 
     <TextView
         android:id="@+id/error_custom_message"
-        android:text="Error"
+        android:text="@string/message_error"
         android:gravity="center"
         android:layout_below="@+id/error_custom_image"
         android:layout_marginTop="16dp"

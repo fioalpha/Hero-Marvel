@@ -4,7 +4,7 @@ import android.content.Context
 import android.view.View
 import android.widget.Toast
 import br.com.fioalpha.heromarvel.domain.model.CharacterDomain
-import br.com.fioalpha.heromarvel.presentation.list_characters.presentation.model.CharacterViewData
+import br.com.fioalpha.heromarvel.presentation.listcharacters.presentation.model.CharacterViewData
 import io.reactivex.Observable
 import io.reactivex.annotations.CheckReturnValue
 import io.reactivex.annotations.SchedulerSupport

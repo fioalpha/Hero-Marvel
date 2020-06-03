@@ -47,7 +47,7 @@ class HandleError: Interceptor {
         val request = chain.request()
         return try {
             chain.proceed(request)
-        } catch(e: Exception) {
+        } catch(e: IOException) {
             if(e is ConnectException) {
                 throw NetworkErrorException("Voce não tem internet")
             }

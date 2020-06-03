@@ -1,7 +1,7 @@
 package br.com.fioalpha.heromarvel.domain.model
 
 import android.os.Parcelable
-import br.com.fioalpha.heromarvel.presentation.detail_character.model.CharacterDetailViewData
+import br.com.fioalpha.heromarvel.presentation.detailcharacter.model.CharacterDetailViewData
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize

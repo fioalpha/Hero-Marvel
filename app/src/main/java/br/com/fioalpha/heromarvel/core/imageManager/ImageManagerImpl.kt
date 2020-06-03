@@ -1,6 +1,7 @@
 package br.com.fioalpha.heromarvel.core.imageManager
 
 import android.widget.ImageView
+import br.com.fioalpha.heromarvel.R
 import com.squareup.picasso.Picasso
 
 class ImageManagerImpl: ImageManger {
@@ -9,6 +10,7 @@ class ImageManagerImpl: ImageManger {
             .load(url)
             .fit()
             .centerCrop()
+            .placeholder(R.drawable.marvel)
             .into(view)
     }
 }

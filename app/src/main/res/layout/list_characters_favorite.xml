@@ -6,12 +6,11 @@
     android:layout_height="match_parent">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/search_recycler"
+        android:id="@+id/list_recycler"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#FFFFFF"
         android:scrollbars="vertical"
-        android:visibility="visible"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -19,38 +18,36 @@
         tools:visibility="visible" />
 
     <ProgressBar
-        android:id="@+id/search_progress"
+        android:id="@+id/list_progress"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="@+id/search_recycler"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/search_recycler"
-        app:layout_constraintTop_toTopOf="@+id/search_recycler"
-        tools:visibility="gone" />
-
-    <br.com.fioalpha.heromarvel.core.views.ErrorViewCustom
-        android:id="@+id/search_error"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:visibility="gone"
+        android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/search_recycler"
-        tools:visibility="gone" />
-
-    <br.com.fioalpha.heromarvel.core.views.EmptyViewCustom
-        android:id="@+id/search_empty"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0"
+        tools:visibility="visible" />
+
+    <br.com.fioalpha.heromarvel.core.views.ErrorViewCustom
+        android:id="@+id/list_error"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:visibility="visible" />
+
+    <br.com.fioalpha.heromarvel.core.views.EmptyViewCustom
+        android:id="@+id/list_empty"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         tools:visibility="gone" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

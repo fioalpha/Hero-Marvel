@@ -14,8 +14,8 @@ import br.com.fioalpha.heromarvel.core.views.EmptyViewCustom
 import br.com.fioalpha.heromarvel.core.views.ErrorViewCustom
 import br.com.fioalpha.heromarvel.presentation.favorite.model.FavoriteIntent
 import br.com.fioalpha.heromarvel.presentation.favorite.model.FavoriteState
-import br.com.fioalpha.heromarvel.presentation.list_characters.presentation.CharactersAdapter
-import br.com.fioalpha.heromarvel.presentation.list_characters.presentation.model.CharacterViewData
+import br.com.fioalpha.heromarvel.presentation.listcharacters.presentation.CharactersAdapter
+import br.com.fioalpha.heromarvel.presentation.listcharacters.presentation.model.CharacterViewData
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
@@ -54,6 +54,23 @@ class FavoriteFragment: Fragment() {
         val view = inflater.inflate(R.layout.list_characters_favorite, container, false)
         setupView(view)
         setupRecycler()
+
+
+        return view
+    }
+
+    private fun setupView(view: View) {
+        with(view) {
+            recycler = findViewById(R.id.list_recycler)
+            loader = findViewById(R.id.list_progress)
+            errorView = findViewById(R.id.list_error)
+            emptyView = findViewById(R.id.list_empty)
+        }
+    }
+
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         disposable.add(
             viewModel.states()
                 .subscribeOn(Schedulers.io())
@@ -61,22 +78,6 @@ class FavoriteFragment: Fragment() {
                 .doOnNext(::render)
                 .subscribe()
         )
-
-        return view
-    }
-
-    private fun setupView(view: View) {
-        with(view) {
-            recycler = findViewById(R.id.search_recycler)
-            loader = findViewById(R.id.search_progress)
-            errorView = findViewById(R.id.search_error)
-            emptyView = findViewById(R.id.search_empty)
-        }
-    }
-
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
         disposable.addAll(viewModel.processIntents(intents()))
     }
 

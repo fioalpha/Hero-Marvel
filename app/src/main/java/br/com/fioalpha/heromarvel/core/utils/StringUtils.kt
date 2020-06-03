@@ -25,7 +25,12 @@ class GeneratorHash(
         )
     }
 
-    private fun createHash(time: Long, publicKey: String, privateKey: String): String = "$time$privateKey$publicKey".convertToMD5()
+    private fun createHash(
+        time: Long,
+        publicKey: String,
+        privateKey:
+        String
+    ): String = "$time$privateKey$publicKey".convertToMD5()
 
 }
 

@@ -20,14 +20,20 @@ class IsCharacterFavoriteUseCaseImpl(
             .flatMap { findFavorite(characters, it) }
     }
 
-    private fun findFavorite(character: List<CharacterDomain>, favorite: List<CharacterDomain>): Observable<List<CharacterDomain>> {
+    private fun findFavorite(
+        character: List<CharacterDomain>,
+        favorite: List<CharacterDomain>
+    ): Observable<List<CharacterDomain>> {
         return Observable.fromIterable(character)
             .map { findFavorite(it, favorite) }
             .toList()
             .toObservable()
     }
 
-    private fun findFavorite(character: CharacterDomain, favorite: List<CharacterDomain>): CharacterDomain {
+    private fun findFavorite(
+        character: CharacterDomain,
+        favorite: List<CharacterDomain>
+    ): CharacterDomain {
         val contain = favorite.map { it.id }.binarySearch (character.id)
         return if(contain < 0) character
             else character.copy(favorite = true)

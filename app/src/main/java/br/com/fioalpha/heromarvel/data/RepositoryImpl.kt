@@ -3,14 +3,15 @@ package br.com.fioalpha.heromarvel.data
 import androidx.room.EmptyResultSetException
 import br.com.fioalpha.heromarvel.core.network.CharacterSimpleResponse
 import br.com.fioalpha.heromarvel.core.network.Service
-import br.com.fioalpha.heromarvel.core.room_local.AppDatabase
-import br.com.fioalpha.heromarvel.core.room_local.CharacterFavoriteRoom
+import br.com.fioalpha.heromarvel.core.roomlocal.AppDatabase
+import br.com.fioalpha.heromarvel.core.roomlocal.CharacterFavoriteRoom
 import br.com.fioalpha.heromarvel.core.utils.GeneratorHash
 import br.com.fioalpha.heromarvel.core.utils.transform
 import br.com.fioalpha.heromarvel.domain.model.CharacterDomain
 import io.reactivex.Completable
 import io.reactivex.Observable
 import io.reactivex.Single
+import java.util.concurrent.TimeUnit
 
 class RepositoryImpl(
      private val remoteDataSource: Service,

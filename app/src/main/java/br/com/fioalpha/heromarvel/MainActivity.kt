@@ -1,21 +1,18 @@
 package br.com.fioalpha.heromarvel
 
-import android.app.SearchManager
-import android.content.Context
-import android.content.Intent
 import android.os.Bundle
-import android.view.Menu
-import android.view.MenuInflater
-import android.view.MenuItem
-import android.widget.TextView
+import android.view.LayoutInflater
+import android.widget.AbsListView
+import android.widget.LinearLayout
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.SearchView
 import androidx.appcompat.widget.Toolbar
-import androidx.core.content.ContextCompat
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.setupWithNavController
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 
@@ -43,4 +40,42 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
         }
     }
 
+}
+
+const val INIT_VALUE = 0
+private const val STARTING = 0
+abstract class EndlessScrollListener (
+    private val layoutManager: GridLayoutManager
+): RecyclerView.OnScrollListener() {
+    private var visibleItemCount = INIT_VALUE
+    private var totalItemCount = INIT_VALUE
+    private var pastVisibleItems = INIT_VALUE
+    private var loading = true
+
+    override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+        super.onScrolled(recyclerView, dx, dy)
+
+        if (dy > STARTING) {
+            visibleItemCount = layoutManager.childCount
+            totalItemCount = layoutManager.itemCount
+            pastVisibleItems = layoutManager.findFirstVisibleItemPosition();
+
+            if (loading) {
+                if ((visibleItemCount + pastVisibleItems) >= totalItemCount) {
+                    loading = false
+                    onLoadMore()
+                }
+            }
+        }
+    }
+
+    fun enableMore() {
+        loading = true
+    }
+
+    fun disableMore() {
+        loading = false
+    }
+
+    abstract fun onLoadMore(): Boolean
 }
