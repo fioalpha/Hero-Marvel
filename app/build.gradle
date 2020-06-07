@@ -4,6 +4,8 @@ apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 apply plugin: "androidx.navigation.safeargs.kotlin"
 
+apply from: "../jacoco.gradle"
+
 def properties = new Properties()
 properties.load(new FileInputStream(rootProject.file("local.properties")))
 
@@ -39,6 +41,7 @@ android {
     }
     buildTypes {
         release {
+            testCoverageEnabled true
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
@@ -46,6 +49,8 @@ android {
     testOptions {
         unitTests.returnDefaultValues = true
         unitTests.includeAndroidResources = true
+        execution 'ANDROID_TEST_ORCHESTRATOR'
+        animationsDisabled true
     }
 
 }
@@ -99,4 +104,13 @@ dependencies {
     androidTestImplementation 'io.mockk:mockk-android:1.10.0'
 
     implementation "androidx.fragment:fragment:1.2.4"
+    androidTestUtil 'com.android.support.test:orchestrator:1.0.2'
+}
+
+jacoco {
+    toolVersion = '0.8.0'
+}
+
+tasks.withType(Test) {
+    jacoco.includeNoLocationClasses = true
 }
