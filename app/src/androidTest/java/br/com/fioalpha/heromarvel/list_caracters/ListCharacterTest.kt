@@ -10,12 +10,12 @@ import br.com.fioalpha.heromarvel.domain.model.CharacterDomain
 import io.mockk.every
 import io.mockk.mockk
 import io.reactivex.Observable
+import java.util.concurrent.TimeUnit
 import org.junit.FixMethodOrder
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.MethodSorters
 import org.koin.dsl.module
-import java.util.concurrent.TimeUnit
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 @RunWith(AndroidJUnit4ClassRunner::class)
@@ -28,9 +28,9 @@ class ListCharacterTest {
     private val moduleDi = module { factory(override = true) { repository } }
 
     @Test
-    fun showCharacters () {
+    fun showCharacters() {
         every { repository.fetchCharacter(1) } returns Observable.just(characterList)
-            .delay(1000,TimeUnit.MILLISECONDS)
+            .delay(1000, TimeUnit.MILLISECONDS)
 
         every { repository.fetchCharacterFavorite() } returns Observable.just(emptyList())
 
@@ -77,7 +77,6 @@ class ListCharacterTest {
                 errorViewIsShowed()
                 messageError("Error")
             }
-
         }
     }
 

@@ -4,8 +4,7 @@ import androidx.test.espresso.ViewInteraction
 import br.com.fioalpha.heromarvel.R
 import br.com.fioalpha.heromarvel.core.BaseTestRobot
 
-
-class ListCharacterRobot: BaseTestRobot() {
+class ListCharacterRobot : BaseTestRobot() {
 
     fun loadingIsShowed() = isShow(R.id.list_progress)
 
@@ -26,9 +25,8 @@ class ListCharacterRobot: BaseTestRobot() {
     fun errorViewIsHide() = isHide(R.id.error_custom_message)
 
     fun messageError(message: String) = matchText(R.id.error_custom_message, message)
-
 }
 
-fun listCharacters(func: ListCharacterRobot.() -> Unit)  = ListCharacterRobot().apply {
+fun listCharacters(func: ListCharacterRobot.() -> Unit) = ListCharacterRobot().apply {
     func()
 }

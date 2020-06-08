@@ -7,17 +7,16 @@ import org.koin.core.context.loadKoinModules
 import org.koin.core.context.unloadKoinModules
 import org.koin.core.module.Module
 
-class ApplicationCustomTest: CustomApplication() {
+class ApplicationCustomTest : CustomApplication() {
 
-    internal fun loadModules(module: Module, block: () -> Unit)  {
+    internal fun loadModules(module: Module, block: () -> Unit) {
         loadKoinModules(module)
         block()
         unloadKoinModules(module)
     }
-
 }
 
-class MyRunnerTest: AndroidJUnitRunner() {
+class MyRunnerTest : AndroidJUnitRunner() {
 
     override fun newApplication(
         cl: ClassLoader?,
@@ -26,5 +25,4 @@ class MyRunnerTest: AndroidJUnitRunner() {
     ): Application {
         return super.newApplication(cl, ApplicationCustomTest::class.java.name, context)
     }
-
 }

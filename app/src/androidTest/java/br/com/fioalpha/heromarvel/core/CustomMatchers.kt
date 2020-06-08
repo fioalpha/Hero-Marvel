@@ -10,7 +10,7 @@ class CustomMatchers {
 
     companion object {
         fun withItemCount(count: Int): Matcher<View> {
-            return object: BoundedMatcher<View, RecyclerView>(
+            return object : BoundedMatcher<View, RecyclerView>(
                 RecyclerView::class.java) {
                 override fun describeTo(description: Description?) {
                     description?.appendText("RecyclerView with item count: $count")
