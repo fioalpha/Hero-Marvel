@@ -3,7 +3,7 @@
 [![ktlint](https://img.shields.io/badge/code%20style-%E2%9D%A4-FF4081.svg)](https://ktlint.github.io/)
 [![Maintainability](https://api.codeclimate.com/v1/badges/40458f4dd36e07d836c0/maintainability)](https://codeclimate.com/github/fioalpha/Hero-Marvel)
 [![codecov](https://codecov.io/gh/fioalpha/Hero-Marvel/branch/master/graph/badge.svg)](https://codecov.io/gh/fioalpha/Hero-Marvel)
-[![Codacy Badge](https://app.codacy.com/project/badge/Grade/f30f7c1cbdac4efab1fb442944d346a1)](https://www.codacy.com/manual/fioalpha/Hero-Marvel?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=fioalpha/Hero-Marvel&amp;utm_campaign=Badge_Grade)
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/9c425fb18e184ae79ceb15a52e6224b8)](https://www.codacy.com/manual/fioalpha/Hero-Marvel?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=fioalpha/Hero-Marvel&amp;utm_campaign=Badge_Grade)
 
 
 ## Sobre
