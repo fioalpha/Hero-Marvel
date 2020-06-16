@@ -1,4 +1,5 @@
 # Hero Marvel Project
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/0c50a5d2c0494ea3b3cf9f74046b0017)](https://app.codacy.com/manual/fioalpha/Hero-Marvel?utm_source=github.com&utm_medium=referral&utm_content=fioalpha/Hero-Marvel&utm_campaign=Badge_Grade_Dashboard)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/6f352ccfc19949a797a17cbf0c2ea0aa)](https://app.codacy.com/manual/fioalpha/Hero-Marvel?utm_source=github.com&utm_medium=referral&utm_content=fioalpha/Hero-Marvel&utm_campaign=Badge_Grade_Dashboard)
 [![CircleCI](https://circleci.com/gh/fioalpha/Hero-Marvel/tree/master.svg?style=svg)](https://circleci.com/gh/fioalpha/Hero-Marvel/tree/master)
 [![ktlint](https://img.shields.io/badge/code%20style-%E2%9D%A4-FF4081.svg)](https://ktlint.github.io/)
