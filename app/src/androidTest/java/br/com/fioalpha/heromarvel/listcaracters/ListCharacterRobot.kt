@@ -1,4 +1,4 @@
-package br.com.fioalpha.heromarvel.list_caracters
+package br.com.fioalpha.heromarvel.listcaracters
 
 import androidx.test.espresso.ViewInteraction
 import br.com.fioalpha.heromarvel.R

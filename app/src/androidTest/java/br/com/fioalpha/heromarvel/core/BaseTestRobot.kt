@@ -10,9 +10,9 @@ import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
 import androidx.test.espresso.matcher.ViewMatchers.withEffectiveVisibility
 import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.espresso.matcher.ViewMatchers.withText
-import br.com.fioalpha.heromarvel.core.CustomMatchers.Companion.withItemCount
+import br.com.fioalpha.heromarvel.core.CustomMatchers.withItemCount
 
-abstract class BaseTestRobot {
+open class BaseTestRobot {
 
     fun fillEditText(resId: Int, text: String): ViewInteraction =
         onView(withId(resId)).perform(ViewActions.replaceText(text), ViewActions.closeSoftKeyboard())

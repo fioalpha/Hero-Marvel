@@ -1,4 +1,4 @@
-package br.com.fioalpha.heromarvel.list_caracters
+package br.com.fioalpha.heromarvel.listcaracters
 
 import androidx.test.core.app.ActivityScenario
 import androidx.test.core.app.ApplicationProvider
